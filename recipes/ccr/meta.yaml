@@ -1,8 +1,7 @@
-{% set name = "ccr" %}
-{% set version = "1.2.0" %}
+{% set version = "1.3.0" %}
 
 package:
-  name: {{ name|lower }}
+  name: ccr
   version: {{ version }}
 
 source:
@@ -15,6 +14,10 @@ build:
   # https://github.com/ccr/ccr/issues/166
   # https://github.com/ccr/ccr/issues/167
   skip: true  # [win]
+  run_exports:
+    # 2021/12/29 hmaarrfk
+    # No information on https://abi-laboratory.pro/
+    - {{ pin_subpackage('ccr', max_pin='x.x') }}
 
 requirements:
   build:
