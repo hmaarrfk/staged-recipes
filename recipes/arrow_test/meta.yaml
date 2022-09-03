@@ -163,23 +163,23 @@ outputs:
       summary: Python libraries for Apache Arrow
 
     test:
-      imports:
-        - pyarrow
-        - pyarrow.dataset
-        - pyarrow.flight
-        - pyarrow.gandiva  # [not (osx and arm64)]
-        - pyarrow.orc      # [unix]
-        - pyarrow.parquet
-        - pyarrow.plasma   # [unix]
-        - pyarrow.fs
-        #- pyarrow._s3fs
-        - pyarrow._hdfs
-        # We can only test importing cuda package but cannot run when a
-        # CUDA device is not available, for instance, when building from CI.
-        # On Windows, we cannot even do that due to `nvcuda.dll` not being found, see
-        # https://conda-forge.org/docs/maintainer/knowledge_base.html#nvcuda-dll-cannot-be-found-on-windows
-        # However, we check below for (at least) the presence of a correctly-compiled module
-        - pyarrow.cuda     # [cuda_compiler_version != "None" and not win]
+      # imports:
+      #   - pyarrow
+      #   - pyarrow.dataset
+      #   - pyarrow.flight
+      #   - pyarrow.gandiva  # [not (osx and arm64)]
+      #   - pyarrow.orc      # [unix]
+      #   - pyarrow.parquet
+      #   - pyarrow.plasma   # [unix]
+      #   - pyarrow.fs
+      #   #- pyarrow._s3fs
+      #   - pyarrow._hdfs
+      #   # We can only test importing cuda package but cannot run when a
+      #   # CUDA device is not available, for instance, when building from CI.
+      #   # On Windows, we cannot even do that due to `nvcuda.dll` not being found, see
+      #   # https://conda-forge.org/docs/maintainer/knowledge_base.html#nvcuda-dll-cannot-be-found-on-windows
+      #   # However, we check below for (at least) the presence of a correctly-compiled module
+      #   - pyarrow.cuda     # [cuda_compiler_version != "None" and not win]
       commands:
         - exit 0
 
