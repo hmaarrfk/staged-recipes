@@ -34,8 +34,8 @@ outputs:
       summary: 'A meta-package to select Arrow build variant'
 
   - name: arrow-cpp
-    #script: build-arrow.sh  # [not win]
-    #script: bld-arrow.bat   # [win]
+    script: build-arrow.sh  # [not win]
+    script: bld-arrow.bat   # [win]
     version: {{ version }}
     build:
       string: py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}_{{ build_ext }}
@@ -110,8 +110,8 @@ outputs:
         - exit 0
 
   - name: pyarrow
-    #script: build-pyarrow.sh  # [not win]
-    #script: bld-pyarrow.bat   # [win]
+    script: build-pyarrow.sh  # [not win]
+    script: bld-pyarrow.bat   # [win]
     version: {{ version }}
     build:
       string: py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}_{{ build_ext }}
@@ -184,8 +184,8 @@ outputs:
         - exit 0
 
   - name: pyarrow-tests
-    #script: build-pyarrow.sh  # [not win]
-    #script: bld-pyarrow.bat   # [win]
+    script: build-pyarrow.sh  # [not win]
+    script: bld-pyarrow.bat   # [win]
     version: {{ version }}
     build:
       string: py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}_{{ build_ext }}
