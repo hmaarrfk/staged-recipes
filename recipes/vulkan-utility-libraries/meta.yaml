@@ -1,0 +1,51 @@
+{% set version = "1.3.290" %}
+
+package:
+  name: vulkan-utility-libraries
+  version: {{ version }}
+
+source:
+  url: https://github.com/KhronosGroup/Vulkan-Utility-Libraries/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: daa5106b3c3a9f84deaf179c7eefb8d38bffb4839ec06bdcd00071f89ec8b613
+
+build:
+  # osx requires MotlenVK which we do not package at conda-forge (yet?)
+  # it may be that one can patch out the requirements to get the command
+  # vulkaninfo to work correctly
+  skip: true  # [osx]
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ stdlib('c') }}
+    - {{ compiler('cxx') }}
+    - cmake
+    - pkg-config   # [unix]
+    - make         # [unix]
+    - ninja        # [win]
+  host:
+    - libvulkan-headers  {{ version }}
+    # - libvulkan-loader   {{ version }}
+
+test:
+  commands:
+    - test -f ${PREFIX}/include/vulkan/layer/vk_layer_settings.h    # [unix]
+    - test -f ${PREFIX}/include/vulkan/utility/vk_dispatch_table.h  # [unix]
+    # Static library????
+    - test -f ${PREFIX}/lib/libVulkanLayerSettings.a                # [unix]
+    - test -f ${PREFIX}/lib/libVulkanSafeStruct.a                   # [unix]
+    - if not exist %PREFIX%\\Library\\include\\vulkan\\layer\\vk_layer_settings.h exit 1    # [win]
+    - if not exist %PREFIX%\\Library\\include\\vulkan\\utility\\vk_dispatch_table.h exit 1  # [win]
+    - if not exist %PREFIX%\\Library\\lib\\VulkanLayerSettings.lib exit 1                   # [win]
+
+about:
+  home: https://github.com/KhronosGroup/Vulkan-Utility-Libraries
+  summary: This repo was created to share code across various Vulkan repositories.
+  license: Apache-2.0
+  license_family: Apache
+  license_file: LICENSE.md
+
+extra:
+  recipe-maintainers:
+    - hmaarrfk
